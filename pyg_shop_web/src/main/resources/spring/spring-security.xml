@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+        xmlns="http://www.springframework.org/schema/security"
+        xmlns:beans="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+						http://www.springframework.org/schema/security
+						http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+    <!-- 以下页面不被拦截 -->
+    <http pattern="/*.html" security="none"></http>
+    <http pattern="/css/**" security="none"></http>
+    <http pattern="/img/**" security="none"></http>
+    <http pattern="/js/**" security="none"></http>
+    <http pattern="/plugins/**" security="none"></http>
+    <!--还有一个特别需要注意的,不拦截的资源,就是商家注册时候需要访问下路径,拦截就会造成没完成注册就跳转登录,不符合逻辑-->
+    <http pattern="/seller/add.do" security="none"></http>
+
+    <!-- 页面拦截规则 -->
+    <http use-expressions="false">
+        <intercept-url pattern="/**" access="ROLE_SELLER"/>
+        <form-login
+                login-page="/shoplogin.html"
+                default-target-url="/admin/index.html"
+                authentication-failure-url="/shoplogin.html"
+                always-use-default-target="true"/>
+
+        <!--跨域请求伪造-->
+        <csrf disabled="true"/>
+        <!-- iframe策略(跟内容区别相关的,局部刷新,左侧保持不动,左侧局部刷新) -->
+        <headers>
+            <frame-options policy="SAMEORIGIN"/>
+        </headers>
+        <!--退出登录状态-->
+        <logout/>
+    </http>
+
+    <!-- 认证管理器 -->
+    <authentication-manager>
+        <!--认证提供者-->
+        <!--这里不能是写死的登录的用户账号,应该是去数据库中进行查询得到的-->
+        <!--<authentication-provider>-->
+            <!--<user-service>-->
+                <!--<user name="admin" password="123456" authorities="ROLE_ADMIN"/>-->
+                <!--<user name="sunwukong" password="dasheng" authorities="ROLE_ADMIN"/>-->
+            <!--</user-service>-->
+        <!--</authentication-provider>-->
+        <authentication-provider user-service-ref="UserDetailsServiceImpl">
+            <password-encoder ref="passwordEncoder"></password-encoder>
+        </authentication-provider>
+    </authentication-manager>
+
+    <!-- 配置认证服务类 -->
+    <beans:bean id="UserDetailsServiceImpl" class="cn.pyg.user.service.UserDetailsServiceImpl">
+        <beans:property name="sellerService" ref="sellerService"></beans:property>
+
+    </beans:bean>
+
+    <!-- 关于权限的用户需要找服务也是去dubbo中心去找服务,找到对应接口由其动态代理生成的实现类 -->
+    <dubbo:application name="pyg_shop_web" />
+    <dubbo:registry address="zookeeper://10.211.55.7:2181"/>
+    <dubbo:reference interface="cn.pyg.sellergoods.service.SellerService" id="sellerService"></dubbo:reference>
+
+    <!--指定一个加密方式,配置一个bean-->
+    <beans:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></beans:bean>
+
+
+</beans:beans>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>demo3数据双向绑定(ng-controller)</title>
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+    <!--定义一个函数-->
+    <script type="text/javascript">
+        function helloController($scope) {
+            $scope.greeting = {
+                text: "xxxxxxxhello!!!!!!!"
+            };
+        }
+    </script>
+</head>
+
+
+<body ng-app ng-controller="helloController">
+
+<div>
+    <p>{{greeting.text}},augular!</p>
+</div>
+
+</body>
+</html>

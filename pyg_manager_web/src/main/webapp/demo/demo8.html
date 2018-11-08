@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>demo8循环对象数组</title>
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+
+    <script>
+        var app=angular.module('myCat',[]);//定义一个myCat的模块
+        //定义控制器
+        app.controller('myController2',function ($scope) {
+            $scope.list=[
+                {name:"张三",math:100,chinese:100},
+                {name:"李四",math:99,chinese:99},
+                {name:"王五",math:98,chinese:98},
+            ];//定义数组
+        })
+    </script>
+</head>
+
+
+<body ng-app="myCat" ng-controller="myController2">
+    <table>
+        <tr ng-repeat="entity in list">
+            <td>{{entity.name}}</td>
+            <td>{{entity.math}}</td>
+            <td>{{entity.chinese}}</td>
+        </tr>
+    </table>
+</body>
+</html>

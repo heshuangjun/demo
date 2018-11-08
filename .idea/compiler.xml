@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="fastDFS_demo" />
+        <module name="pyg_common" />
+        <module name="pyg_content_interface" />
+        <module name="pyg_content_service" />
+        <module name="pyg_dao" />
+        <module name="pyg_manager_web" />
+        <module name="pyg_pojo" />
+        <module name="pyg_portal_web" />
+        <module name="pyg_search_interface" />
+        <module name="pyg_search_service" />
+        <module name="pyg_search_web" />
+        <module name="pyg_sellergoods_interface" />
+        <module name="pyg_sellergoods_service" />
+        <module name="pyg_shop_web" />
+        <module name="pyg_solr_util" />
+        <module name="springboot" />
+        <module name="springDateRedis_Demo" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="springboot" options="-parameters" />
+    </option>
+  </component>
+</project>

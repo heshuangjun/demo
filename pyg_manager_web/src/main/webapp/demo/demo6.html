@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>demo5事件指令</title>
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+
+    <script>
+        var app = angular.module("myApp", []);//定义一个模块
+        //定义一个控制器
+        app.controller('myController', function ($scope) {
+            $scope.add = function () {
+                $scope.z=parseInt($scope.x)+parseInt($scope.y);
+            }
+        });
+    </script>
+</head>
+
+<body ng-app="myApp" ng-controller="myController">
+
+    <!--绑定变量x-->
+    X:<input ng-model="x">
+    <br/>
+
+    <!--绑定变量y-->
+    Y:<input ng-model="y">
+    <br/>
+
+    结果:{{z}}
+    <br/>
+    <button ng-click="add()">运算</button>
+
+
+</body>
+</html>

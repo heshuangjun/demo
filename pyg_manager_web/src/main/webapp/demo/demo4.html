@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>demo4定义模块</title>
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+    <script type="text/javascript">
+
+        //定义一个模块
+        var app = angular.module('pyg', []);
+        //使用模块调用方法
+        app.controller('helloController', function ($scope) {
+            $scope.greeting = function () {
+                return "hello";
+            }
+        })
+    </script>
+</head>
+
+<body ng-app="pyg">
+    <div ng-controller="helloController">
+        <p>{{greeting()}},augularJS!!!!!!!!!!!</p>
+    </div>
+</body>
+</html>

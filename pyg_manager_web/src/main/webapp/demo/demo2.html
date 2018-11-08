@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>demo1数据双向绑定(ng-model)</title>
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+</head>
+
+<!--ng-app定义angularjs模块 定义angularjs的作用范围-->
+<body>
+
+<div ng-app>
+
+    <!--ng-model绑定模型数据-->
+    请输入:<input ng-model="myname">
+
+    <!--通过视图数据展示绑定模型变量中的数据-->
+    输入的内容是:{{myname}}
+
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>demo7循环数组</title>
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+
+    <script>
+        var app = angular.module('myDog', []);//定义一个叫myDog的模块
+        //定义控制器
+        app.controller('myController', function ($scope) {
+            $scope.list=[10,20,30,50,60,70,80,90];//定义一个数组
+        });
+    </script>
+</head>
+
+
+<body ng-app="myDog" ng-controller="myController">
+
+    <table>
+        <tr ng-repeat="x in list">
+            <td>{{x}}</td>
+        </tr>
+    </table>
+
+</body>
+</html>
