@@ -36,16 +36,16 @@ public class SolrTest {
     /**
      * 添加索引库,修改其实也是这个方法,只要id控制一样,达到修改的效果!
      */
-//    @Test
-//    public void addTest() {
-//        TbItem tbItem = new TbItem();
-//        tbItem.setId(1L);
-//        tbItem.setBrand("苹果");
-//        tbItem.setTitle("小米最新款手环 移动3G 16G");
-//        tbItem.setSeller("苹果旗舰店");
-//        solrTemplate.saveBean(tbItem);
-//        solrTemplate.commit();
-//    }
+    @Test
+    public void addTest() {
+        TbItem tbItem = new TbItem();
+        tbItem.setId(1L);
+        tbItem.setBrand("苹果");
+        tbItem.setTitle("小米最新款手环 移动3G 16G");
+        tbItem.setSeller("苹果旗舰店");
+        solrTemplate.saveBean(tbItem);
+        solrTemplate.commit();
+    }
 
     /**
      * 查询索引库,基于id
