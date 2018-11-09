@@ -29,7 +29,7 @@ public class ItemPageController {
     private ItemPageService itemPageService;
 
     @Autowired
-    private FreeMarkerConfig freeMarkerConfig;
+    private FreeMarkerConfig freemarkerConfig;
 
     @RequestMapping("/getItemHtml")
     public String getItemHtml(Long goodsId) {
@@ -38,10 +38,11 @@ public class ItemPageController {
             //页面静态化需要的模型数据
             Goods goods = itemPageService.findOne(goodsId);
             //1.获取配置信息对象
-            Configuration configuration = freeMarkerConfig.getConfiguration();
+            Configuration configuration = freemarkerConfig.getConfiguration();
             //2.加载模板数据,创建一个模板对象
             Template template = configuration.getTemplate("item.ftl");
             List<TbItem> itemList = goods.getItemList();
+
             for (TbItem tbItem : itemList) {
 
                 Map map = new HashMap();
