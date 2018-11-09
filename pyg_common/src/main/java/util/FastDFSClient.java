@@ -7,13 +7,16 @@ import org.csource.fastdfs.StorageServer;
 import org.csource.fastdfs.TrackerClient;
 import org.csource.fastdfs.TrackerServer;
 
+/**
+ * 添加了一个注释
+ */
 public class FastDFSClient {
 
 	private TrackerClient trackerClient = null;
 	private TrackerServer trackerServer = null;
 	private StorageServer storageServer = null;
 	private StorageClient1 storageClient = null;
-	
+
 	public FastDFSClient(String conf) throws Exception {
 		if (conf.contains("classpath:")) {
 			conf = conf.replace("classpath:", this.getClass().getResource("/").getPath());
