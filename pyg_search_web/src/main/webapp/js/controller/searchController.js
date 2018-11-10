@@ -1,6 +1,9 @@
-app.controller('searchController', function ($scope, $controller, searchService) {
+//控制层  $location接收路由地址传参
+app.controller('searchController', function ($scope, $controller, searchService, $location) {
 
     $controller('baseController', {$scope: $scope});//继承baseController
+
+    var keywords = $location.search()["keywords"];
 
 
     //从页面的400异常捕捉到问题是从Controller层没有传一个对象,因此先初始此对象,对象格式在html去找定义好的.
@@ -16,10 +19,18 @@ app.controller('searchController', function ($scope, $controller, searchService)
         sort: "ASC",//排序规则
         sortField: "",//排序字段
 
-        pageNo:1,
-        pageSize:60
+        pageNo: 1,
+        pageSize: 60
 
     };
+
+    if (keywords != "undefined") {
+        //门户网站输入了搜索内容
+        $scope.searchMap.keywords = keywords;
+    } else {
+        //门户网站未输入搜索内容
+        $scope.searchMap.keywords = "手机";
+    }
 
 
     /**
@@ -78,20 +89,10 @@ app.controller('searchController', function ($scope, $controller, searchService)
     }
 
 
-
-
-
-
-
-
-
-
-
-
     /**
      * 构建分页工具条代码
      */
-    buildPageLabel=function(){
+    buildPageLabel = function () {
         $scope.pageLabel = [];// 新增分页栏属性
         var maxPageNo = $scope.resultMap.totalPages;// 得到最后页码
 
@@ -129,8 +130,8 @@ app.controller('searchController', function ($scope, $controller, searchService)
 
 
     //分页查询
-    $scope.queryForPage=function(pageNo){
-        $scope.searchMap.pageNo=pageNo;
+    $scope.queryForPage = function (pageNo) {
+        $scope.searchMap.pageNo = pageNo;
 
         //执行查询操作
         $scope.searchItem();
@@ -145,7 +146,7 @@ app.controller('searchController', function ($scope, $controller, searchService)
     // 3) 如果展示是中间5页,前后都有省略号
 
     // 定义函数,判断是否是第一页
-    $scope.isTopPage = function() {
+    $scope.isTopPage = function () {
         if ($scope.searchMap.pageNo == 1) {
             return true;
         } else {
@@ -153,7 +154,7 @@ app.controller('searchController', function ($scope, $controller, searchService)
         }
     }
     // 定义函数,判断是否最后一页
-    $scope.isLastPage = function() {
+    $scope.isLastPage = function () {
         if ($scope.searchMap.pageNo == $scope.resultMap.totalPages) {
             return true;
         } else {
