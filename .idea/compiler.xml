@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="activeMQ" />
         <module name="fastDFS_demo" />
         <module name="freeMarker_Demo" />
         <module name="pyg_common" />

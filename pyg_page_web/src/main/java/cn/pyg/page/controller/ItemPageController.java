@@ -44,13 +44,13 @@ public class ItemPageController {
             List<TbItem> itemList = goods.getItemList();
 
             for (TbItem tbItem : itemList) {
-
+                System.out.println("数据库要录入了tbItem的商品,才进入循环,获取静态页面的id");
                 Map map = new HashMap();
                 map.put("goods", goods);
                 map.put("tbItem", tbItem);
 
                 //3.创建一个输出流对象Writer,一对一生成FileWriter对象,指定生成的文件名
-                Writer out = new FileWriter("/Users/heshuangjun/Desktop/page41/" + tbItem.getId() + ".html");
+                Writer out = new FileWriter("/Library/apache-tomcat-8.5.33/webapps/page41/" + tbItem.getId() + ".html");
                 //4.调用模板对象的process方法输出文件
                 template.process(map, out);
                 //5.关闭流
