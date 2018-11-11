@@ -9,6 +9,13 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
+	<!--freemarker配置模板字符集和存放的位置-->
+	<bean id="freemarkerConfig"
+		  class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/WEB-INF/ftl/" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
 	<!--没有使用wife的情况下-->
     <!--<dubbo:protocol name="dubbo" port="20882" host="127.0.0.1"></dubbo:protocol>-->
 

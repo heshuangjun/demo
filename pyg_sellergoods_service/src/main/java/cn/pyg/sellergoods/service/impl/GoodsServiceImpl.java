@@ -267,6 +267,13 @@ public class GoodsServiceImpl implements GoodsService {
     @Autowired
     private Destination deleItemSolrDestination;
 
+
+    @Autowired
+    private Destination addItemPageDestination;
+
+    @Autowired
+    private Destination deleItemPageDestination;
+
     /**
      * 商品的上下架
      * @param ids
@@ -287,12 +294,30 @@ public class GoodsServiceImpl implements GoodsService {
                             return session.createTextMessage(id+"");
                         }
                     });
+
+                    //发送消息,生成相应的静态页
+                    jmsTemplate.send(addItemPageDestination, new MessageCreator() {
+                        @Override
+                        public Message createMessage(Session session) throws JMSException {
+                            return session.createTextMessage(id+"");
+                        }
+                    });
                 }
+
+
 
                 //下架
                 if("0".equals(isMarketable)){
                     //发送消息,同步删除上架商品到索引库
                     jmsTemplate.send(deleItemSolrDestination, new MessageCreator() {
+                        @Override
+                        public Message createMessage(Session session) throws JMSException {
+                            return session.createTextMessage(id+"");
+                        }
+                    });
+
+                    //发送消息,同步删除静态页
+                    jmsTemplate.send(deleItemPageDestination, new MessageCreator() {
                         @Override
                         public Message createMessage(Session session) throws JMSException {
                             return session.createTextMessage(id+"");
