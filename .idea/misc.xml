@@ -24,6 +24,8 @@
         <option value="$PROJECT_DIR$/../springDateRedis_Demo/pom.xml" />
         <option value="$PROJECT_DIR$/../freeMarker_Demo/pom.xml" />
         <option value="$PROJECT_DIR$/../activeMQ/pom.xml" />
+        <option value="$PROJECT_DIR$/../activeMQ_spring_product/pom.xml" />
+        <option value="$PROJECT_DIR$/../activeMQ_spring_consumer/pom.xml" />
       </list>
     </option>
   </component>
