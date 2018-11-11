@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amq="http://activemq.apache.org/schema/core"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context   
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jms
+		http://www.springframework.org/schema/jms/spring-jms.xsd">
+	
+    <!-- 真正可以产生Connection的ConnectionFactory，由对应的 JMS服务厂商提供-->  
+	<bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">  
+	    <property name="brokerURL" value="tcp://10.211.55.7:61616"/>
+	</bean>
+	   
+    <!-- Spring用于管理真正的ConnectionFactory的ConnectionFactory -->  
+	<bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">  
+	<!-- 目标ConnectionFactory对应真实的可以产生JMS Connection的ConnectionFactory -->  
+	    <property name="targetConnectionFactory" ref="targetConnectionFactory"/>  
+	</bean>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--这个是队列目的地，点对点的  文本信息-->
+	<!--商品上架时同步添加索引库的消息-->
+	<bean id="addItemsolrDestination" class="org.apache.activemq.command.ActiveMQQueue">
+	    <constructor-arg value="add_item_text"/>
+	</bean>
+
+	<!-- 我的监听类 -->
+	<bean id="addItemSolrMessageListener" class="cn.pyg.search.listener.AddItemSolrMessageListener"></bean>
+	<!-- 消息监听容器 -->
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="addItemsolrDestination" />
+		<property name="messageListener" ref="addItemSolrMessageListener" />
+	</bean>
+
+
+										<!-- 删除 -->
+	<!--这个是队列目的地，点对点的  文本信息-->
+	<bean id="deleItemsolrDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="add_item_text"/>
+	</bean>
+
+	<!-- 我的监听类 -->
+	<bean id="deleItemSolrMessageListener" class="cn.pyg.search.listener.DeleItemSolrMessageListener"></bean>
+	<!-- 消息监听容器 -->
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="deleItemsolrDestination" />
+		<property name="messageListener" ref="deleItemSolrMessageListener" />
+	</bean>
+	
+</beans>

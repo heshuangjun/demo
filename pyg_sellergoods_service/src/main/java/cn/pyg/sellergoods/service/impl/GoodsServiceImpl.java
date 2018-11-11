@@ -11,8 +11,14 @@ import com.github.pagehelper.PageHelper;
 import entity.PageResult;
 import groupEntity.Goods;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -252,12 +258,51 @@ public class GoodsServiceImpl implements GoodsService {
         }
     }
 
+    @Autowired
+    private JmsTemplate jmsTemplate;
+
+    @Autowired
+    private Destination addItemSolrDestination;
+
+    @Autowired
+    private Destination deleItemSolrDestination;
+
+    /**
+     * 商品的上下架
+     * @param ids
+     * @param isMarketable
+     */
     @Override
     public void updateIsMarketable(Long[] ids, String isMarketable) {
-        for (Long id : ids) {
+        for (final Long id : ids) {
             TbGoods tbGoods = goodsMapper.selectByPrimaryKey(id);
             //这里的上架是指的已审核的商品,需要做一个判断
             if("1".equals(tbGoods.getAuditStatus())){
+                //上架
+                if("1".equals(isMarketable)){
+                    //发送消息,同步添加上架商品到索引库
+                    jmsTemplate.send(addItemSolrDestination, new MessageCreator() {
+                        @Override
+                        public Message createMessage(Session session) throws JMSException {
+                            return session.createTextMessage(id+"");
+                        }
+                    });
+                }
+
+                //下架
+                if("0".equals(isMarketable)){
+                    //发送消息,同步删除上架商品到索引库
+                    jmsTemplate.send(deleItemSolrDestination, new MessageCreator() {
+                        @Override
+                        public Message createMessage(Session session) throws JMSException {
+                            return session.createTextMessage(id+"");
+                        }
+                    });
+                }
+
+
+
+                //审核通过
                 tbGoods.setIsMarketable(isMarketable);
                 goodsMapper.updateByPrimaryKey(tbGoods);
             }else{
