@@ -26,6 +26,7 @@
         <option value="$PROJECT_DIR$/../activeMQ/pom.xml" />
         <option value="$PROJECT_DIR$/../activeMQ_spring_product/pom.xml" />
         <option value="$PROJECT_DIR$/../activeMQ_spring_consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/../httpClient_Demo/pom.xml" />
       </list>
     </option>
   </component>

@@ -11,6 +11,7 @@
         <module name="activeMQ_spring_product" />
         <module name="fastDFS_demo" />
         <module name="freeMarker_Demo" />
+        <module name="httpClient_Demo" />
         <module name="pyg_common" />
         <module name="pyg_content_interface" />
         <module name="pyg_content_service" />
