@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/../activeMQ" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../freeMarker_Demo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../httpClient_Demo" vcs="Git" />
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
 </project>
