@@ -29,6 +29,10 @@ public class AddItemPageMessageListener implements MessageListener {
     @Autowired
     private FreeMarkerConfig freemarkerConfig;
 
+    /**
+     * 这是第14天 用阿里大于发短信的功能
+     * @param message 短信
+     */
     @Override
     public void onMessage(Message message) {
         try {
