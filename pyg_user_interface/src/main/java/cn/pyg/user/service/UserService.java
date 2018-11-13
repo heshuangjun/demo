@@ -61,5 +61,11 @@ public interface UserService {
 
     void createSmsCode(String phone) throws IOException;
 
+	/**
+	 * 校验验证码
+	 * @param phone
+	 * @param smsCode
+	 * @return
+	 */
     boolean checkSmsCode(String phone, String smsCode);
 }
