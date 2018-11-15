@@ -22,7 +22,14 @@ public class SMSController {
     @Autowired
     private SmsUtil smsUtil;
 
-
+    /**
+     * 13:39分
+     * @param phoneNumbers
+     * @param signName
+     * @param templateCode
+     * @param param
+     * @return
+     */
     @RequestMapping(value = "/sendMessage", method = RequestMethod.POST)
     public Map sendMessage(String phoneNumbers, String signName, String templateCode, String param) {
         try {
@@ -37,6 +44,7 @@ public class SMSController {
             map.put("BizId", response.getBizId());
 
             return map;
+
 
         } catch (ClientException e) {
             e.printStackTrace();
