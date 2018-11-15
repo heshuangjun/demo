@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>pyg_parent</artifactId>
-        <groupId>cn.pyg</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <artifactId>pinyougou_parent</artifactId>
+        <groupId>com.pinyougou</groupId>
+        <version>3.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>pyg_user_web</artifactId>
+    <artifactId>pinyougou_user_web</artifactId>
     <packaging>war</packaging>
 
     <dependencies>
@@ -80,6 +80,7 @@
             <artifactId>servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
@@ -97,12 +98,34 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.pyg</groupId>
-            <artifactId>pyg_common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>4.1.0.RELEASE</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>4.1.0.RELEASE</version>
+        </dependency>
+        <!-- cas与springsecurity整合包 -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-cas</artifactId>
+            <version>4.1.0.RELEASE</version>
+        </dependency>
+        <!-- cas客户端jar -->
+        <dependency>
+            <groupId>org.jasig.cas.client</groupId>
+            <artifactId>cas-client-core</artifactId>
+            <version>3.3.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>log4j-over-slf4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
     </dependencies>
 
@@ -122,4 +145,7 @@
             </plugin>
         </plugins>
     </build>
+
+
+
 </project>
